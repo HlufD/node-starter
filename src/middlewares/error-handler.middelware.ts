@@ -2,8 +2,8 @@ import {
   ApplicationError,
   HttpStatusCode,
   InternalErrorCode,
-} from "@/lib/custome-error.lib.js";
-import { ResponseHandler } from "@/lib/Response-handler.lib.js";
+} from "../lib/custome-error.lib.js";
+import { ResponseHandler } from "../lib/Response-handler.lib.js";
 import { NextFunction, Request, Response } from "express";
 
 function globalErrorHandler(
