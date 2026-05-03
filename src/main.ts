@@ -1,11 +1,9 @@
+import { bootstrap } from "./app.js";
+import { initializeEnv } from "./config/env.config.js";
 
-import express from "express";
+function main() {
+  initializeEnv();
+  bootstrap();
+}
 
-const app = express();
-const port = process.env.PORT || 4000;
-
-app.use(express.json());
-
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+main();
