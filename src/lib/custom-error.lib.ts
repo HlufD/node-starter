@@ -31,7 +31,6 @@ export enum HttpStatusCode {
   GATEWAY_TIMEOUT = 504,
 }
 
-
 export enum InternalErrorCode {
   INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR",
   BAD_REQUEST = "BAD_REQUEST",
@@ -58,7 +57,7 @@ class ApplicationError extends Error {
     this.internalErrorCode = internalErrorCode;
 
     //Remove noise from stack traces so you only see the real origin of the error.
-    Error.captureStackTrace(this, this.constructor); 
+    Error.captureStackTrace(this, this.constructor);
   }
 }
 

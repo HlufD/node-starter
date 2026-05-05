@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { InternalErrorCode, HttpStatusCode } from "./custome-error.lib.js";
+import { InternalErrorCode, HttpStatusCode } from "./custom-error.lib.js";
 
 export type SuccessResponse<T> = {
   success: true;
@@ -33,7 +33,7 @@ class ResponseHandler {
     res: Response,
     statusCode: HttpStatusCode,
     message = "Something went wrong",
-    code:InternalErrorCode = InternalErrorCode.INTERNAL_SERVER_ERROR,
+    code: InternalErrorCode = InternalErrorCode.INTERNAL_SERVER_ERROR,
   ) {
     const response: ErrorResponse = {
       success: false,
