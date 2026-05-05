@@ -3,6 +3,8 @@ dotenv.config();
 
 export type NodeEnv = "development" | "production" | "test";
 
+export type RedisMode = "sentinel" | "standalone";
+
 export type Env = {
   DATABASE_URL: string;
   PORT: number;
@@ -14,6 +16,7 @@ export type Env = {
   REDIS_USERNAME: string;
   REDIS_PASSWORD: string;
   REDIS_MASTER_NAME: string;
+  REDIS_MODE: RedisMode;
 };
 
 function getEnv<T extends keyof Env>(key: T) {
@@ -36,6 +39,7 @@ export function initializeEnv() {
     REDIS_PORT: getEnv("REDIS_PORT"),
     REDIS_USERNAME: getEnv("REDIS_USERNAME"),
     REDIS_MASTER_NAME: getEnv("REDIS_MASTER_NAME"),
+    REDIS_MODE: getEnv("REDIS_MODE") as RedisMode,
   };
 
   globalThis._CONFIG = env;

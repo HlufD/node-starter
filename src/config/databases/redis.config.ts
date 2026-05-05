@@ -1,5 +1,4 @@
 import { Redis, RedisOptions } from "ioredis";
-import { NodeEnv } from "../env.config.js";
 
 export class RedisClient {
   public static instance: Redis | null = null;
@@ -14,12 +13,12 @@ export class RedisClient {
 
       const sentinelHosts: { host: string; port: number }[] = redisHosts.map(
         (host) => {
-          return { host, port: Number(_CONFIG.REDIS_PORT) };
+          return { host: host.trim(), port: Number(_CONFIG.REDIS_PORT) };
         },
       );
 
-      switch (_CONFIG.NODE_ENV as NodeEnv) {
-        case "production":
+      switch (_CONFIG.REDIS_MODE) {
+        case "sentinel":
           options = {
             sentinels: sentinelHosts,
             username: _CONFIG.REDIS_USERNAME,
@@ -31,7 +30,7 @@ export class RedisClient {
             },
 
             maxRetriesPerRequest: 3,
-            enableOfflineQueue: true,
+            enableOfflineQueue: false,
 
             reconnectOnError(err) {
               const recoverable = ["READONLY", "ECONNRESET", "ETIMEDOUT"];
