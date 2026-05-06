@@ -49,6 +49,7 @@ class ApplicationError extends Error {
     internalErrorCode: InternalErrorCode = InternalErrorCode.INTERNAL_SERVER_ERROR,
   ) {
     super(message);
+    // this is a safety for older node and js versions like (below 16)
     Object.setPrototypeOf(this, new.target.prototype);
 
     this.name = this.constructor.name;
