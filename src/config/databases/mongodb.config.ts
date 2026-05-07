@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+const RETRY_INTERVAL = 5000;
+
 async function connectToMongoDb() {
   try {
     await mongoose.connect(globalThis._CONFIG.DATABASE_URL, {
@@ -13,7 +15,8 @@ async function connectToMongoDb() {
     console.log("Connected to MongoDB successfully.");
   } catch (error) {
     console.error("Connection to MongoDB failed.", error);
-    process.exit(1);
+    console.log(`Retrying in ${RETRY_INTERVAL / 1000} seconds...`);
+    setTimeout(connectToMongoDb, RETRY_INTERVAL);
   }
 
   mongoose.connection.on("error", (err) => {
